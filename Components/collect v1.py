@@ -12,5 +12,5 @@ phone = input("Please enter your phone number. ")
 print(name)
 print(phone)
 
-print("You will receive a text message from us once the item/s are ready for pickup.")
+print("You will receive a text message from us once the item(s) are ready for pickup.")
 
