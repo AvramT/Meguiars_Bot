@@ -64,6 +64,7 @@ def collect_info():
     #print(customer_details['phone'])
     print(customer_details)
 
+# Delivery information - name, phone number and address
 def delivery_info():
     question = ("Please enter your name. ")
     customer_details['name'] = not_blank(question )
@@ -84,6 +85,7 @@ def delivery_info():
     question = ("Please enter your suburb. ")
     customer_details['suburb'] = not_blank(question )
     print(customer_details['suburb'])
+    print(customer_details)
 
 # Main function
 def main():
