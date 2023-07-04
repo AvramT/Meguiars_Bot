@@ -10,6 +10,12 @@ product_names = ['Wash Mitt','Wheel & Tire Cleaner (710ml)','Leather Cleaner/Con
 # List of product prices
 product_prices = [34.99, 33.99, 39.99, 66.99, 97.19, 22.99, 48.50, 23.99, 32.99, 10.99, 67.99, 46.95]
 
+# List to store ordered products 
+order_list = []
+
+# List to store products prices
+order_cost = []
+
 # Customer details dictionary
 customer_details = {}
 
@@ -100,11 +106,45 @@ def menu():
     for count in range(number_product):
         print("{} {} ${:.2f}" .format(count+1, product_names[count], product_prices[count]))
 
+# Choose total number of products
+def order_products():
+    num_products = 0
+    
+    while True:
+        try:
+            num_products = int(input("How many products would you like to order? "))
+            if num_products >= 1 and num_products <= float('inf'):
+                break
+            else:
+                print("You cannot have a negative number.")
+        except ValueError:
+            print("That is not a valid number. ")
+            print("Please enter a minimum order quantity of 1.")
+
+    for item in range(num_products):
+        while num_products > 0:
+            while True:
+                try:
+                    products_ordered = int(input("Please choose your products by entering the number from the menu. "))
+                    if products_ordered >= 1 and products_ordered <= 12:
+                        break
+                    else:
+                        print("Your order must be between 1 and 12. ")
+                except ValueError:
+                    print("That is not a valid number. ")
+                    print("Please enter a number between 1 or 12. ")
+            products_ordered = products_ordered -1
+            order_list.append(product_names[products_ordered])
+            order_cost.append(product_prices[products_ordered])
+            [print("{} ${:.2f}" .format(product_names[products_ordered],product_prices[products_ordered]))]
+            num_products = num_products-1
+
 # Main function
 def main():
     welcome()
     order_type()
     menu()
+    order_products()
     
 main()
 

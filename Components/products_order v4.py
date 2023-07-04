@@ -35,7 +35,7 @@ def order_products():
             print("That is not a valid number. ")
             print("Please enter a minimum order quantity of 1.")
 
-    # Choose product from menu
+    # Choose products from menu
     for item in range(num_products):
         while num_products > 0:
             while True:
