@@ -41,6 +41,7 @@ def welcome():
 
 # Menu for click & collect or delivery
 def order_type():
+    delivery_collect = ""
     print("Is your order for click & collect or delivery?")
 
     print("For click & collect, please enter 1.")
@@ -53,17 +54,20 @@ def order_type():
                 if delivery == 1:
                     print("Click & Collect")
                     collect_info()
+                    delivery_collect = "Click & Collect"
                     break
 
                 elif delivery == 2:
                     print("Delivery")
                     delivery_info()
+                    delivery_collect = "Delivery"
                     break
             else:
                 print("The number must be 1 or 2.")
         except ValueError:
             print("That is not a valid number.")
             print("Please enter 1 or 2.")
+    return delivery_collect
 
 # Click & collect information - name and phone number
 def collect_info():
@@ -139,13 +143,37 @@ def order_products():
             [print("{} ${:.2f}" .format(product_names[products_ordered],product_prices[products_ordered]))]
             num_products = num_products-1
 
+# Prints order out including: - if order is delivered or collected up - name and price of each product - total cost including a $9 delivery charge if less than 5 items ordered
+def order_print(delivery_collect):
+    print()
+    total_cost = sum(order_cost)
+    print("Customer Details:")
+    if delivery_info == "Click & Collect":
+        print("Your order is for click & collect.")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
+    elif delivery_info == "Delivery":
+        print("Your order is for delivery.")
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
+    print()
+    print("Order Details:")
+    count = 0
+    for item in order_list:
+        print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
+        count = count+1
+    print()
+    print("Total Order Cost:")
+    print(f"${total_cost:.2f}")
+
 # Main function
 def main():
     welcome()
-    order_type()
+    delivery_collect = order_type()
+    print(delivery_collect)
     menu()
     order_products()
+    order_print(delivery_collect)
     
 main()
+
 
 
