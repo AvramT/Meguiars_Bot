@@ -137,7 +137,7 @@ def order_products():
                 except ValueError:
                     print("That is not a valid number. ")
                     print("Please enter a number between 1 or 12. ")
-            products_ordered = products_ordered -1
+            products_ordered = products_ordered-1
             order_list.append(product_names[products_ordered])
             order_cost.append(product_prices[products_ordered])
             [print("{} ${:.2f}" .format(product_names[products_ordered],product_prices[products_ordered]))]
@@ -147,20 +147,26 @@ def order_products():
 def order_print(delivery_collect):
     print()
     total_cost = sum(order_cost)
-    print("Customer Details:")
-    if delivery_info == "Click & Collect":
+    print("Your Details:")
+    if delivery_collect == "Click & Collect":
         print("Your order is for click & collect.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
-    elif delivery_info == "Delivery":
+    elif delivery_collect == "Delivery":
         print("Your order is for delivery.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']} \nCustomer Address: {customer_details['house']} {customer_details['street']} {customer_details['suburb']}")
     print()
-    print("Order Details:")
+    print("Your Order Details:")
     count = 0
     for item in order_list:
         print("Ordered: {} Cost ${:.2f}".format(item, order_cost[count]))
         count = count+1
     print()
+    if delivery_collect == "Delivery" :
+        if len(order_list) >= 5:
+            print("No delivery surcharge is applied.")
+        elif len(order_list) < 5:
+            print("Since you ordered less than 5 items, a $9.00 delivery surcharge is applied.")
+            total_cost = total_cost+9
     print("Total Order Cost:")
     print(f"${total_cost:.2f}")
 
