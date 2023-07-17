@@ -150,7 +150,7 @@ def order_print(delivery_collect):
     total_cost = sum(order_cost)
     print("Your Details:")
     if delivery_collect == "Click & Collect":
-        print("Your order is for click & collect.")
+        print("Your order is for click & collect. You will receive a text message when the products are ready for pickup.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone: {customer_details['phone']}")
     elif delivery_collect == "Delivery":
         print("Your order is for delivery.")
