@@ -53,6 +53,26 @@ def val_str(question):
         else:
             return response.title()
 
+# Validates input to check if it is between 7 to 10 digits
+def val_ph(question, ph_low, ph_high):
+    while True:
+        try:
+            num = int(input(question))
+            test_num = num
+            count = 0
+            while test_num > 0:
+                test_num = test_num//10
+                count = count+1
+            if count >= ph_low and count <= ph_high:
+                    return num
+            else:
+                print("New Zealand phone numbers have between 7 to 10 digits.")
+        except ValueError:
+            print("Please enter a number.")
+
+ph_low = 7
+ph_high = 10
+
 # Welcome message with random name generator
 def welcome():
     num = randint(0,9)
@@ -79,45 +99,45 @@ def order_type():
     delivery = val_int(LOW, HIGH, question)
     if delivery == 1:
         print ("Click & Collect")
-        del_pick = "Click & Collect"
+        delivery_collect = "Click & Collect"
         collect_info()
     else:
         print ("Delivery")
         delivery_info()
-        del_pick = "Delivery"
+        delivery_collect = "Delivery"
     return delivery_collect
 
 # Click & collect information - name and phone number
 def collect_info():
     question = ("Please enter your name. ")
-    customer_details['name'] = val_str(question )
+    customer_details['name'] = val_str(question)
     #print(customer_details['name'])
 
     question = ("Please enter your phone number. ")
-    customer_details['phone'] = not_blank(question )
+    customer_details['phone'] = val_ph(question, ph_low, ph_high)
     #print(customer_details['phone'])
     print(customer_details)
 
 # Delivery information - name, phone number and address
 def delivery_info():
     question = ("Please enter your name. ")
-    customer_details['name'] = val_str(question )
+    customer_details['name'] = val_str(question)
     #print(customer_details['name'])
 
     question = ("Please enter your phone number. ")
-    customer_details['phone'] = not_blank(question )
+    customer_details['phone'] = val_ph(question, ph_low, ph_high)
     #print(customer_details['phone'])
 
     question = ("Please enter your house number. ")
-    customer_details['house'] = not_blank(question )
+    customer_details['house'] = not_blank(question)
     print(customer_details['house'])
 
     question = ("Please enter your street name. ")
-    customer_details['street'] = val_str(question )
+    customer_details['street'] = val_str(question)
     print(customer_details['street'])
 
     question = ("Please enter your suburb. ")
-    customer_details['suburb'] = val_str(question )
+    customer_details['suburb'] = val_str(question)
     print(customer_details['suburb'])
     print(customer_details)
 
@@ -183,7 +203,6 @@ def order_print(delivery_collect):
     print(f"${total_cost:.2f}")
 
 # Option to confirm or cancel order
-
 def cancel_confirm():
     LOW = 1
     HIGH = 2
